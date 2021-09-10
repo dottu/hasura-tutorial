@@ -3,4 +3,10 @@
 ```
 npm install
 npm start
+
 ```
+
+# Hasura 
+```
+ hasura console
+``` 

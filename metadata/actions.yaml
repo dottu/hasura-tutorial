@@ -1,4 +1,8 @@
 actions:
+- name: GetTD
+  definition:
+    kind: ""
+    handler: http://172.17.0.1:3030/todo/list
 - name: InstertRole
   definition:
     kind: synchronous
@@ -79,4 +83,16 @@ custom_types:
       type: object
       field_mapping:
         user_Id: id
+  - name: TodoGet
+  - name: TDOutput
+    relationships:
+    - remote_table:
+        schema: public
+        name: users
+      name: user
+      source: Miichisoft
+      type: object
+      field_mapping:
+        user_Id: id
+  - name: RoleGet
   scalars: []

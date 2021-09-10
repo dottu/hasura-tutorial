@@ -1,3 +1,7 @@
+type Query {
+  GetTD: TDOutput
+}
+
 type Mutation {
   InstertRole(
     role: String!
@@ -108,5 +112,23 @@ type RoleOutput {
   id: Int!
   role: String!
   user_Id: Int
+}
+
+type TodoGet {
+  id: Int
+  name: String
+  user_id: Int
+}
+
+type TDOutput {
+  id: Int!
+  role: String!
+  user_Id: Int
+}
+
+type RoleGet {
+  id: Int
+  name: String
+  user_id: Int
 }
 
