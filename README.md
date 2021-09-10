@@ -10,3 +10,8 @@ npm start
 ```
  hasura console
 ``` 
+
+# run docker
+```
+docker-compose up
+```
