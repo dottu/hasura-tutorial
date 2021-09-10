@@ -1,12 +1,12 @@
 actions:
-- name: MyMutation
-  definition:
-    kind: synchronous
-    handler: http://localhost:3000
 - name: addUser
   definition:
     kind: synchronous
     handler: http://172.17.0.1:3030
+- name: getList
+  definition:
+    kind: ""
+    handler: http://172.17.0.1:3030/todo
 - name: updateUser
   definition:
     kind: synchronous
@@ -21,4 +21,5 @@ custom_types:
   - name: addUserOutput
   - name: updateOutput
   - name: MyMutationOutput
+  - name: getListTodo
   scalars: []

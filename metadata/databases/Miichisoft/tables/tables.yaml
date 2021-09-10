@@ -1,4 +1,6 @@
 - "!include public_employees.yaml"
 - "!include public_payroll.yaml"
+- "!include public_project.yaml"
+- "!include public_role.yaml"
 - "!include public_todos.yaml"
 - "!include public_users.yaml"

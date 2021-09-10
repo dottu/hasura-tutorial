@@ -1,11 +1,11 @@
 type Mutation {
-  MyMutation: MyMutationOutput
-}
-
-type Mutation {
   addUser(
     name: String!
   ): addUserOutput
+}
+
+type Query {
+  getList: getListTodo
 }
 
 type Mutation {
@@ -39,5 +39,11 @@ type updateOutput {
 type MyMutationOutput {
   id: Int!
   name: String!
+}
+
+type getListTodo {
+  id: Int!
+  name: String!
+  user_id: Int
 }
 

@@ -1,0 +1,1 @@
+CREATE TABLE "public"."role" ("id" serial NOT NULL, "role" text NOT NULL, "user_Id" integer, PRIMARY KEY ("id") , FOREIGN KEY ("user_Id") REFERENCES "public"."users"("id") ON UPDATE restrict ON DELETE restrict);

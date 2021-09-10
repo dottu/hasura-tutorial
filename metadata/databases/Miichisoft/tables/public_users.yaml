@@ -2,6 +2,20 @@ table:
   name: users
   schema: public
 array_relationships:
+- name: projects
+  using:
+    foreign_key_constraint_on:
+      column: user_id
+      table:
+        name: project
+        schema: public
+- name: roles
+  using:
+    foreign_key_constraint_on:
+      column: user_Id
+      table:
+        name: role
+        schema: public
 - name: todos
   using:
     foreign_key_constraint_on:
