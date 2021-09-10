@@ -1,4 +1,26 @@
 type Mutation {
+  InstertRole(
+    role: String!
+    user_Id: Int!
+  ): RoleOutput
+}
+
+type Mutation {
+  InstertTodo(
+    user_id: Int!
+    name: String!
+  ): OutputTodo
+}
+
+type Mutation {
+  ListTodo: TodoOutput
+}
+
+type Query {
+  MyQuery1: QueryOutput
+}
+
+type Mutation {
   addUser(
     name: String!
   ): addUserOutput
@@ -6,6 +28,13 @@ type Mutation {
 
 type Query {
   getList: getListTodo
+}
+
+type Mutation {
+  updateTodo(
+    id: Int
+    name: String
+  ): updateTodoOutput
 }
 
 type Mutation {
@@ -42,8 +71,42 @@ type MyMutationOutput {
 }
 
 type getListTodo {
+  id: Int
+  name: String
+  user_id: Int
+}
+
+type updateTodoOutput {
+  user_id: Int
+}
+
+type OutputTodo {
   id: Int!
   name: String!
   user_id: Int
+}
+
+type OutputList {
+  id: Int!
+  name: String!
+  user_id: Int
+}
+
+type TodoOutput {
+  id: Int
+  name: String
+  user_id: Int
+}
+
+type QueryOutput {
+  id: Int!
+  name: String!
+  user_id: Int
+}
+
+type RoleOutput {
+  id: Int!
+  role: String!
+  user_Id: Int
 }
 

@@ -1,4 +1,22 @@
 actions:
+- name: InstertRole
+  definition:
+    kind: synchronous
+    handler: http://172.17.0.1:3030/role/create
+- name: InstertTodo
+  definition:
+    kind: synchronous
+    handler: http://172.17.0.1:3030/todo/create
+  permissions:
+  - role: HR
+- name: ListTodo
+  definition:
+    kind: asynchronous
+    handler: http://127.17.0.1/todolist
+- name: MyQuery1
+  definition:
+    kind: ""
+    handler: http://127.17.0.1/listto
 - name: addUser
   definition:
     kind: synchronous
@@ -7,6 +25,12 @@ actions:
   definition:
     kind: ""
     handler: http://172.17.0.1:3030/todo
+- name: updateTodo
+  definition:
+    kind: synchronous
+    handler: http://172.17.0.1:3030/updateTodo
+  permissions:
+  - role: HR
 - name: updateUser
   definition:
     kind: synchronous
@@ -22,4 +46,37 @@ custom_types:
   - name: updateOutput
   - name: MyMutationOutput
   - name: getListTodo
+  - name: updateTodoOutput
+    relationships:
+    - remote_table:
+        schema: public
+        name: users
+      name: uptodo
+      source: Miichisoft
+      type: object
+      field_mapping:
+        user_id: id
+  - name: OutputTodo
+    relationships:
+    - remote_table:
+        schema: public
+        name: users
+      name: user
+      source: Miichisoft
+      type: object
+      field_mapping:
+        user_id: id
+  - name: OutputList
+  - name: TodoOutput
+  - name: QueryOutput
+  - name: RoleOutput
+    relationships:
+    - remote_table:
+        schema: public
+        name: users
+      name: user
+      source: Miichisoft
+      type: object
+      field_mapping:
+        user_Id: id
   scalars: []
