@@ -8,6 +8,9 @@ npm start
 
 # Hasura 
 ```
+ hasura metadata reload
+ hasura migrate apply --all-databases
+ hasura metadata apply
  hasura console
 ``` 
 
