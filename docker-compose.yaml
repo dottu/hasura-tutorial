@@ -9,11 +9,16 @@ services:
       POSTGRES_PASSWORD: postgrespassword
   graphql-engine:
     image: hasura/graphql-engine:v2.0.7
+    env_file: 
+      - ./.env
     ports:
     - "8080:8080"
     depends_on:
     - "postgres"
     restart: always
+    # volumes: 
+    #   - ./backend_hasura/migrations/Miichisoft
+    #   - ./backend_hasura/metadata
     environment:
       ## postgres database to store Hasura metadata
       HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
@@ -26,7 +31,7 @@ services:
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
       ## uncomment next line to set an admin secret
       # HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
-      ACTION_BASE_URL: http://172.17.0.1:3030/
+      # ACTION_BASE_URL: http://172.17.0.1:3030
 volumes:
   db_data:
 
