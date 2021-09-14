@@ -23,6 +23,18 @@ array_relationships:
       table:
         name: todos
         schema: public
+insert_permissions:
+- permission:
+    backend_only: false
+    check:
+      id:
+        _eq: X-Hasura-User-Id
+    columns:
+    - id
+    - name
+    set:
+      id: x-hasura-X-Hasura-User-Id
+  role: HR
 event_triggers:
 - definition:
     delete:

@@ -3,13 +3,15 @@ const gql = require('graphql-tag');
 
 const typeDefs = gql`
   type Query {
-    hello:  String
+    author:  String
+    hello_id: Int
   }
 `;
 
 const resolvers = {
     Query: {
-        hello: () => "abc heleohelladslfagfhs",
+        author: () => "abc heleohelladslfagfhs",
+        hello_id: () => 1
     },
 };
 
