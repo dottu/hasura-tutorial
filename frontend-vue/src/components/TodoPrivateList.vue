@@ -25,13 +25,13 @@ import gql from 'graphql-tag';
 
 export const GET_MY_TODOS = gql`
   query getMyTodos {
-  todos {
-    id
-    title
-    user_id
-    is_completed
+    todos {
+      id
+      title
+      user_id
+      is_completed
+    }
   }
-}
 `
 
 export default {

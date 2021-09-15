@@ -66,6 +66,20 @@ const GET_NEW_PUBLIC_TODOS = gql`
     }
   }
 `;
+
+const GET_TODOS = gql`
+  query getMyTodos {
+    todos {
+      id
+      title
+      user_id
+      is_completed
+      user {
+        name
+      }
+    }
+  }
+`;
 export default {
   components: {
     TodoItem,
@@ -74,42 +88,42 @@ export default {
   data: function () {
     return {
       olderTodosAvailable: true,
-      newTodosCount: 0,
+      newTodosCount: 1,
       limit: 7,
       todos: [
-        // {
-        //   id: "1",
-        //   title: "This is public todo 1",
-        //   is_public: true,
-        //   user: {
-        //     name: "someUser1"
-        //   }
-        // },
-        // {
-        //   id: "2",
-        //   title: "This is public todo 2",
-        //   is_completed: false,
-        //   is_public: true,
-        //   user: {
-        //     name: "someUser2"
-        //   }
-        // },
-        // {
-        //   id: "3",
-        //   title: "This is public todo 3",
-        //   is_public: true,
-        //   user: {
-        //     name: "someUser3"
-        //   }
-        // },
-        // {
-        //   id: "4",
-        //   title: "This is public todo 4",
-        //   is_public: true,
-        //   user: {
-        //     name: "someUser4"
-        //   }
-        // }
+        {
+          id: "1",
+          title: "This is public todo 1",
+          is_public: true,
+          user: {
+            name: "someUser1"
+          }
+        },
+        {
+          id: "2",
+          title: "This is public todo 2",
+          is_completed: false,
+          is_public: true,
+          user: {
+            name: "someUser2"
+          }
+        },
+        {
+          id: "3",
+          title: "This is public todo 3",
+          is_public: true,
+          user: {
+            name: "someUser3"
+          }
+        },
+        {
+          id: "4",
+          title: "This is public todo 4",
+          is_public: true,
+          user: {
+            name: "someUser4"
+          }
+        }
       ],
       type: "public",
     };
@@ -181,5 +195,14 @@ export default {
         });
     },
   },
+  // apollo: {
+  //   todos:  {
+  //     //graphql query
+  //     query : GET_TODOS,
+  //     error(error) {
+  //       this.error = JSON.stringify(error.message)
+  //     }
+  //   }
+  // }
 };
 </script>

@@ -6,8 +6,8 @@ import AuthPlugin from "./plugins/auth";
 import ApolloClient from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import VueApollo from "vue-apollo";
-// import { HttpLink } from "apollo-link-http";
-import { WebSocketLink } from 'apollo-link-ws';
+import { HttpLink } from "apollo-link-http";
+// import { WebSocketLink } from 'apollo-link-ws';
 
 
 Vue.use(AuthPlugin);
@@ -24,24 +24,24 @@ const getHeaders = () => {
 }
 
 //Create an http link : 
-// const link = new  HttpLink({
-//   uri : 'http://localhost:8080/v1/graphql',
-//   fetch,
-//   headers: getHeaders()
-// });
+const link = new  HttpLink({
+  uri : 'http://localhost:8080/v1/graphql',
+  fetch,
+  headers: getHeaders()
+});
 
    // Create a WebSocket link:
-  const link = new WebSocketLink({
-    uri: 'wss://hasura.io/learn/graphql',
-    // uri: 'wss://localhost:8080/v1/graphql',
-    options: {
-      reconnect: true,
-      timeout: 3000,
-      connectionParams: () => {
-        return { headers: getHeaders() };
-      },
-    }
-  });
+  // const link = new WebSocketLink({
+  //   uri: 'wss://hasura.io/learn/graphql',
+  //   // uri: 'wss://localhost:8080/v1/graphql',
+  //   options: {
+  //     reconnect: true,
+  //     timeout: 3000,
+  //     connectionParams: () => {
+  //       return { headers: getHeaders() };
+  //     },
+  //   }
+  // });
 
 
 const client = new ApolloClient({
