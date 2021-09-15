@@ -15,14 +15,60 @@
 </template>
 
 <script>
+  import gql from 'graphql-tag';
+  const SUBSCRIPTION_ONLINE_USERS = gql`
+   subscription getOnlineUsers {
+     online_users(order_by: {user: {name: asc }}) {
+       id
+       user {
+         name
+       }
+     }
+   }
+ `;
   export default {
     data() {
       return {
         online_list: [
-          { user: { name: "someUser1" }},
-          { user: { name: "someUser2" }}
+          // { user: { name: "someUser1" }},
+          // { user: { name: "someUser2" }}
         ]
       };
+    },
+    mounted() {
+      const UPDATE_LASTSEEN_MUTATION = gql`
+        mutation updateLastSeen ($now: timestamptz!) {
+         update_users(where: {}, _set: {last_seen: $now}) {
+           affected_rows
+         }
+       }
+      `;
+      setInterval(function() {
+        this.$apollo
+          .mutate({
+            mutation: UPDATE_LASTSEEN_MUTATION,
+            variables: {
+              now : new Date().toISOString()
+            }
+          })
+          .catch(error => {
+            console.error(error)
+          })
+      }.bind(this), 3000)
+    },
+     apollo: {
+      // Subscriptions
+      $subscribe: {
+        // When a user is added
+        online_users: {
+          query: SUBSCRIPTION_ONLINE_USERS,
+          // Result hook
+          result (data) {
+            // Let's update the local data
+            this.online_list = data.data.online_users
+          },
+        },
+      },
     },
   }
 

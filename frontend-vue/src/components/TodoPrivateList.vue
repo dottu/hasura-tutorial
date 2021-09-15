@@ -1,5 +1,7 @@
 <template>
   <div>
+    <div v-if="$apollo.queries.todos.loading"> Loading....</div>
+    <div v-if="error">{{ error }}</div>
     <div class="todoListwrapper">
       <TodoItem 
         v-bind:todos="filteredTodos" 
@@ -19,6 +21,19 @@
 <script>
 import TodoItem from "../components/TodoItem";
 import TodoFilters from "../components/TodoFilters";
+import gql from 'graphql-tag';
+
+export const GET_MY_TODOS = gql`
+  query getMyTodos {
+  todos {
+    id
+    title
+    user_id
+    is_completed
+  }
+}
+`
+
 export default {
   components: {
     TodoItem, TodoFilters
@@ -28,19 +43,20 @@ export default {
       type: "private",
       filterType: "all",
       todos: [
-        {
-          id: "1",
-          title: "This is private todo 1",
-          is_completed: true,
-          is_public: false
-        },
-        {
-          id: "2",
-          title: "This is private todo 2",
-          is_completed: false,
-          is_public: false
-        }
+        // {
+        //   id: "1",
+        //   title: "This is private todo 1",
+        //   is_completed: true,
+        //   is_public: false
+        // },
+        // {
+        //   id: "2",
+        //   title: "This is private todo 2",
+        //   is_completed: false,
+        //   is_public: false
+        // }
       ],
+      error: null
     }
   },
   computed: {
@@ -72,8 +88,43 @@ export default {
       const isOk = window.confirm("Are you sure?");
       if (isOk) {
         // Remove all the todos that are completed
+        const CLEAR_COMPLETED = gql `
+          mutation clearCompleted {
+            delete_todos(where: {is_completed: {_eq: true}, is_public: {_eq: false}}) {
+              affected_rows
+            }
+          }
+        `;
+        this.$apollo
+          .mutate({
+            mutation: CLEAR_COMPLETED,
+            update: ( cache, { data : { delete_todos }}) => {
+              if (delete_todos.affected_rows) {
+                const data = cache.readQuery({
+                  query: GET_MY_TODOS
+                });
+                data.todos = data.todos.filter((todo) => todo.is_completed !== true)
+                cache.writeQuery({
+                  query: GET_MY_TODOS,
+                  data
+                })
+              }
+            }
+          })
+          .catch(error => {
+            console.error(error)
+          })
       }
     }
   },
+  apollo: {
+    todos:  {
+      //graphql query
+      query : GET_MY_TODOS,
+      error(error) {
+        this.error = JSON.stringify(error.message)
+      }
+    }
+  }
 }
 </script>

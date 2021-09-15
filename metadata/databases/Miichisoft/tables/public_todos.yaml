@@ -11,7 +11,7 @@ insert_permissions:
     check: {}
     columns:
     - id
-    - name
+    - title
     set:
       user_id: x-hasura-User-Id
   role: HR
@@ -19,7 +19,7 @@ select_permissions:
 - permission:
     columns:
     - id
-    - name
+    - title
     - user_id
     filter:
       user_id:
