@@ -2,43 +2,43 @@ actions:
 - name: GetTD
   definition:
     kind: ""
-    handler: http://172.17.0.1:3030/todo/list
+    handler: '{{ACTION_BASE_URL}}/todo/list'
 - name: InstertRole
   definition:
     kind: synchronous
-    handler: http://172.17.0.1:3030/role/create
+    handler: '{{ACTION_BASE_URL}}/role/create'
 - name: InstertTodo
   definition:
     kind: synchronous
-    handler: http://172.17.0.1:3030/todo/create
+    handler: '{{ACTION_BASE_URL}}/todo/create'
   permissions:
   - role: HR
 - name: ListTodo
   definition:
     kind: asynchronous
-    handler: http://127.17.0.1/todolist
+    handler: '{{ACTION_BASE_URL}}/todolist'
 - name: MyQuery1
   definition:
     kind: ""
-    handler: http://127.17.0.1/listto
+    handler: '{{ACTION_BASE_URL}}/listto'
 - name: addUser
   definition:
     kind: synchronous
-    handler: http://172.17.0.1:3030
+    handler: '{{ACTION_BASE_URL}}'
 - name: getList
   definition:
     kind: ""
-    handler: http://172.17.0.1:3030/todo
+    handler: '{{ACTION_BASE_URL}}/todo'
 - name: updateTodo
   definition:
     kind: synchronous
-    handler: http://172.17.0.1:3030/updateTodo
+    handler: '{{ACTION_BASE_URL}}/updateTodo'
   permissions:
   - role: HR
 - name: updateUser
   definition:
     kind: synchronous
-    handler: http://172.17.0.1:3030/update
+    handler: '{{ACTION_BASE_URL}}/update'
 custom_types:
   enums: []
   input_objects: []

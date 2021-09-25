@@ -70,8 +70,9 @@ const execute = async (variables) => {
       method: 'POST',
       body: JSON.stringify({
         query: HASURA_OPERATION,
-        variables
-      })
+        variables,
+      },
+      )
     }
   );
   const data = await fetchResponse.json();

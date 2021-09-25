@@ -1,1 +1,6 @@
-[]
+- name: "off"
+  webhook: http://localhost:8080/v1/graphql
+  schedule: 40 15 * * 1-5
+  include_in_metadata: true
+  payload:
+    hello: 1
